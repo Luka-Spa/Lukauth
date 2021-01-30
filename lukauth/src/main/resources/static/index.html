@@ -1,0 +1,76 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lukauth</title>
+    <link rel="stylesheet" href="milligram.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="container">
+        <a href="#">Home</a>
+        <a href="/swagger-ui.html">Swagger</a>
+        <a href="/h2-console">H2 console</a>
+      </div>
+    </div>
+
+    <div class="container" style="padding-top: 8rem">
+      <div class="row">
+        <div class="column column-100">
+          <h1>Lukauth</h1>
+          <h3>Jwt based authentication service</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column column-100">
+          <pre>
+              <code class="code">
+{
+    "username" : <input id="username" placeholder="username" style="width: 15rem;">
+    "password" : <input id="password" placeholder="password" style="width: 15rem;">
+}        
+               </code>    
+         </pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column column-100">
+          <button onclick="authenticate()" class="float-right">submit</button>
+        </div>
+      </div>
+
+      <pre id="result" style="display: none">
+        <code>
+            result
+        </code>
+    </pre>
+    </div>
+    <script>
+      function authenticate() {
+        const resultEl = document.getElementById("result");
+        fetch("/api/authenticate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+          }),
+        }).then(function (response) {
+          if (!response.ok) {
+            console.warn(response);
+            resultEl.style.display = "block";
+            resultEl.innerHTML = " " + response.status + " unauthorized";
+          } else {
+            response.json().then((data) => {
+              resultEl.style.display = "block";
+              resultEl.innerHTML = JSON.stringify(data);
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

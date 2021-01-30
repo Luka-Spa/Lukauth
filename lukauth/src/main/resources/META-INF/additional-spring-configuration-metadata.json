@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "Secret key for the jwt signature"
+  },
+  {
+    "name": "jwt.prefix",
+    "type": "java.lang.String",
+    "description": "Prefix for the jwt e.g. 'bearer'"
+  },
+  {
+    "name": "auth.admin_username",
+    "type": "java.lang.String",
+    "description": "A description for 'auth.admin_username'"
+  },
+  {
+    "name": "auth.admin_password",
+    "type": "java.lang.String",
+    "description": "A description for 'auth.admin_password'"
+  }
+]}
